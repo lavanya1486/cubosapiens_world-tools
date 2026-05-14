@@ -1,56 +1,46 @@
-# CUBOSAPIENS — Free Tools, Games & AI
+# Contributing to AegisAI
 
-> One platform. Free tools, games and AI for everyone.
-> No signup. No cost. Always free.
+First off, we heartily thank you dear contributor! \
+CUBOSAPIENS_WORLD-TOOLS is built by the community and every contribution matters.
 
-🌐 **Live:** [cubosapiens.world](https://cubosapiens.world)
+---
 
-## What is CUBOSAPIENS?
+## Code of Conduct
 
-A growing collection of free browser-based tools, games and AI
-built for everyone on the internet. All processing happens in
-your browser — we never upload or store your files.
+By participating, you agree to our [Code of Conduct](CODE_OF_CONDUCT.md). Be kind, constructive, and inclusive.
 
-## Tech Stack
+---
 
-| Layer     | Technology                    |
-|-----------|-------------------------------|
-| Frontend  | Next.js 15, TypeScript        |
-| Styling   | Tailwind CSS v4, Custom CSS   |
-| Backend   | Hono.js on Cloudflare Workers |
-| Database  | PostgreSQL (Supabase)         |
-| ORM       | Prisma 6                      |
-| Hosting   | Cloudflare Pages + Workers    |
-| Monorepo  | Turborepo                     |
+## How to Contribute
 
-## Live Tools
+1. **Find an issue**: browse [Issues](https://github.com/rk192324217/cubosapiens_world-tools/issues) or create one describing what you want to build.
+2. **Comment** on the issue to claim it (and await assignation by a maintainer) before starting to avoids duplicate work.
+3. **Fork** the repo and create a branch: `git checkout -b your-feature-or-issue-name`.
+4. **Test** your code appropriately and provide details of the same in the PR.
+5. **Open a PR** against `main` and use the PR template.
 
-| Tool            | URL                                    |
-|-----------------|----------------------------------------|
-| GPS CAM         | gps-cam.cubosapiens.world              |
-| QR Generator    | qr.cubosapiens.world                   |
+---
 
-## Project Structure
+## Pull Request Process
 
-\`\`\`
-cubosapiens/
-├── apps/
-│   ├── web/        ← Next.js frontend
-│   └── api/        ← Hono.js REST API
-└── packages/
-    └── shared/     ← Shared TypeScript types
-\`\`\`
+1. Make sure to test the system locally before opening a PR.
+2. Keep PRs focused: one feature or fix per PR.
+3. Fill in the PR template completely.
+4. Remain patient while the maintainers review the PR.
+5. Address review comments and push to the same branch, the PR updates automatically.
 
-## Contributing
+---
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md)
+## Commit Style
 
-## GirlScript Summer of Code 2025
+We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
-This project is participating in GSSoC 2025.
-Check [Issues](https://github.com/rk192324217/cubosapiens_world-tools/issues)
-for tasks labeled `gssoc`.
+```
+feat: add audit log for guard scan decisions
+fix: handle empty prompt in /guard/scan
+docs: add RAG module usage guide
+test: add unit tests for risk classifier
+chore: bump fastapi to 0.110
+```
 
-## License
-
-MIT License — see [LICENSE](./LICENSE)
+---
