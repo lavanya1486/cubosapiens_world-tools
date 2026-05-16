@@ -61,6 +61,26 @@ export default function Header()
       setSearch("")
     }
   }
+ 
+const handleShare = async () => {
+  const shareData = {
+    title: "CUBOSAPIENS",
+    text: "Free tools, games & AI — no signup needed!",
+    url: "https://cubosapiens.world",
+  }
+
+  try {
+    if (navigator.share) {
+      await navigator.share(shareData)
+    } else {
+      await navigator.clipboard.writeText(shareData.url)
+      alert("Link copied to clipboard!")
+    }
+  } catch (error) {
+    console.error("Share failed:", error)
+  }
+}
+
 
   return (
     <>
@@ -98,6 +118,13 @@ export default function Header()
                 {link.label}
               </Link>
             ))}
+            <button
+  className="header-nav-link"
+  onClick={handleShare}
+  aria-label="Share website"
+>
+  <i className="fa-solid fa-share-nodes"></i>
+</button>
           </nav>
 
           {/* ── RIGHT SIDE ── */}
@@ -205,13 +232,9 @@ export default function Header()
               <p className="dropdown-promo-desc">Free tools & games for everyone — share with friends!</p>
               <button
                 className="dropdown-promo-btn"
-                onClick={() => {
-                  navigator.share?.({
-                    title: "CUBOSAPIENS",
-                    text:  "Free tools, games & AI — no signup needed!",
-                    url:   "https://cubosapiens.world",
-                  }) ?? navigator.clipboard.writeText("https://cubosapiens.world")
-                }}
+                onClick={handleShare}
+                
+              
               >
                 Share Link
               </button>
