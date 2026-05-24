@@ -21,6 +21,7 @@ const moreLinks = [
 ]
 
 export default function Header() {
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const [visitors, setVisitors] = useState<number | null>(null)
   const [search, setSearch] = useState("")
   const [menuOpen, setMenuOpen] = useState(false)
@@ -30,6 +31,23 @@ export default function Header() {
   const menuRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLInputElement>(null)
   const hamburgerRef = useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    const isLight = document.documentElement.classList.contains('light')
+    setTheme(isLight ? 'light' : 'dark')
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark'
+    if (newTheme === 'light') {
+      document.documentElement.classList.add('light')
+      localStorage.setItem('theme', 'light')
+    } else {
+      document.documentElement.classList.remove('light')
+      localStorage.setItem('theme', 'dark')
+    }
+    setTheme(newTheme)
+  }
 
   // useEffect(() => {
   //   fetchCounters().then(d => setVisitors(d.visits))
@@ -137,6 +155,17 @@ export default function Header() {
             >
               <i className="fa-solid fa-share-nodes"></i>
             </button>
+            <button
+              className="header-nav-link theme-toggle-btn"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <i className="fa-solid fa-sun text-yellow-400"></i>
+              ) : (
+                <i className="fa-solid fa-moon text-indigo-500"></i>
+              )}
+            </button>
           </nav>
 
           {/* ── RIGHT SIDE ── */}
@@ -160,6 +189,19 @@ export default function Header() {
               aria-label="Search"
             >
               ⌕
+            </button>
+
+            {/* Mobile theme toggle */}
+            <button
+              className="header-icon-btn !flex lg:!hidden relative text-lg p-2 z-10 items-center justify-center"
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <i className="fa-solid fa-sun text-yellow-400"></i>
+              ) : (
+                <i className="fa-solid fa-moon text-indigo-500"></i>
+              )}
             </button>
 
             {/* Visitor counter */}
@@ -204,6 +246,17 @@ export default function Header() {
               onClick={handleShare}
             >
               <i className="fa-solid fa-share-nodes"></i> Share Website
+            </button>
+
+            <button
+              className="theme-mobile-toggle"
+              onClick={toggleTheme}
+            >
+              {theme === 'dark' ? (
+                <><i className="fa-solid fa-sun text-yellow-400"></i> Light Mode</>
+              ) : (
+                <><i className="fa-solid fa-moon text-indigo-400"></i> Dark Mode</>
+              )}
             </button>
 
             {/* Nav links */}

@@ -3085,3 +3085,362 @@ a {
 .skeleton-icon   { width: 44px;  height: 44px; border-radius: var(--radius-sm); }
 .skeleton-name   { width: 70%;   height: 16px; }
 .skeleton-desc   { width: 90%;   height: 13px; }
+
+/* ==========================================================================
+   LIGHT MODE STYLING & VARIABLE OVERRIDES
+   ========================================================================== */
+
+.light {
+  /* Core Variables */
+  --bg: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-surface2: #f1f5f9;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-soft: #e2e8f0;
+  --brand: #16a34a; /* emerald/green for high contrast */
+  --brand-glow: rgba(22, 163, 74, 0.05);
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+}
+
+/* Scrollbar overrides for light mode */
+.light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+}
+.light ::-webkit-scrollbar-thumb:hover {
+  background: var(--brand);
+}
+
+/* Header layout overrides in light mode */
+.light .header {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.light .header-logo-text {
+  background: linear-gradient(100deg,
+      #15803d 0%,
+      #16a34a 45%,
+      #22c55e 55%,
+      #15803d 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.light .header-nav-link {
+  color: var(--text-secondary);
+}
+
+.light .header-nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.light .header-nav-active {
+  color: var(--text-primary) !important;
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.light .header-search-icon {
+  color: rgba(0, 0, 0, 0.35);
+}
+
+.light .header-search {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+.light .header-search:focus {
+  border-color: var(--brand);
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.light .header-search::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.light .header-icon-btn {
+  color: var(--text-primary) !important;
+}
+
+.light .header-hamburger span {
+  background: var(--text-primary);
+}
+
+/* Mobile dropdown menu overrides */
+.light .header-dropdown {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+}
+
+.light .dropdown-label {
+  color: var(--text-muted);
+}
+
+.light .dropdown-link {
+  color: var(--text-secondary);
+}
+
+.light .dropdown-link:hover {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+}
+
+.light .dropdown-link-active {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-primary);
+}
+
+.light .dropdown-link-icon {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.light .dropdown-divider {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.light .dropdown-promo-btn {
+  color: #fff; /* High contrast since brand is darker green */
+}
+
+/* Theme Toggle Button custom classes (Desktop & Mobile) */
+.theme-mobile-toggle {
+  width: 100%;
+  padding: 9px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: all 0.15s;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.theme-mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.light .theme-mobile-toggle {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+.light .theme-mobile-toggle:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+/* Hero Pill & Tag overrides */
+.light .hero-pill {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+.light .hero-pill:hover {
+  background: rgba(0, 0, 0, 0.07);
+  border-color: rgba(0, 0, 0, 0.14);
+  color: var(--text-primary);
+}
+.light .hero-tag {
+  border: 1px solid rgba(22, 163, 74, 0.25);
+  background: rgba(22, 163, 74, 0.05);
+}
+
+/* Glass Card overrides (Tools & Games cards) */
+.light .tool-card,
+.light .game-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.03),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.light .tool-card::before,
+.light .game-card::before {
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.1) 45%,
+      transparent 100%);
+}
+
+.light .tool-card-live:hover,
+.light .game-card-live:hover {
+  background: rgba(22, 163, 74, 0.05);
+  border-color: var(--brand);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.light .tool-card-name,
+.light .game-card-name {
+  color: var(--text-primary);
+}
+
+.light .tool-card-desc,
+.light .game-card-desc {
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.light .badge-live {
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+.light .badge-soon {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text-muted);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.light .see-more-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.light .see-more-card:hover {
+  background: var(--brand-glow);
+  border-color: var(--brand);
+}
+
+.light .see-more-label,
+.light .see-more-arrow {
+  color: var(--text-secondary);
+}
+
+/* Filters & count overrides */
+.light .filter-tab {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-secondary);
+}
+
+.light .filter-tab:hover {
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.14);
+  color: var(--text-primary);
+}
+
+.light .filter-tab-active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.light .tools-search {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+.light .tools-search:focus {
+  border-color: var(--brand);
+}
+
+/* Recommended Sidebar List */
+.light .recommended-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.light .recommended-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+.light .recommended-icon {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.light .recommended-desc {
+  color: var(--text-muted);
+}
+
+.light .recommended-live {
+  background: rgba(22, 163, 74, 0.1);
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+/* About Section & Contact Form */
+.light .about-card {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.light .about-card-desc {
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.light .about-tool-card:hover {
+  background: var(--brand-glow);
+}
+
+.light .form-input {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+.light .form-submit {
+  color: #fff;
+}
+
+/* Footer overrides */
+.light .footer {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
+}
+
+.light .footer-copy,
+.light .footer-link,
+.light .footer-bottom-link,
+.light .footer-brand-text,
+.light .footer-col-title {
+  color: var(--text-secondary);
+}
+
+.light .footer-link:hover,
+.light .footer-bottom-link:hover {
+  color: var(--brand);
+}
+
