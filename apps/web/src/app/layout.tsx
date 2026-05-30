@@ -1,11 +1,13 @@
 import type { Metadata }                    from "next"
-import { Alfa_Slab_One, Syne, DM_Sans,Geist }    from "next/font/google"
+import { Alfa_Slab_One, Syne, DM_Sans, Geist }    from "next/font/google"
 import "./globals.css"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import TrackVisit from "@/components/TrackVisit"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import PWAInstallPrompt from "@/components/PWAInstallPrompt"
+import CookieBanner from "@/components/CookieBanner"
+import { fetchTools } from "@/lib/api"
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 
@@ -97,10 +99,11 @@ export default function RootLayout({
       </head>
       <body className={`${alfaSlabOne.variable} ${syne.variable} ${dmSans.variable}`}>
         <TrackVisit />
-        <Header />
+        <Header hasLiveAi={false} />
         <main>{children}</main>
         <Footer />
         <PWAInstallPrompt />
+        <CookieBanner />
       </body>
     </html>
   )
