@@ -5,7 +5,6 @@ import Link from "next/link"
 import Image from "next/image"
 import { useRouter, usePathname } from "next/navigation"
 import AiAccessButton from "@/components/ui/AIAccessButton"
-// import { fetchCounters } from "@/lib/api"
 
 const navLinks = [
   { href: "/", label: "Home", icon: <i className="fa-regular fa-house"></i> },
@@ -26,6 +25,7 @@ export default function Header() {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark')
   const [visitors, setVisitors] = useState<number | null>(null)
   const [search, setSearch] = useState("")
+  const [stars, setStars] = useState<number | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const pathname = usePathname()
@@ -34,11 +34,13 @@ export default function Header() {
   const searchRef = useRef<HTMLInputElement>(null)
   const hamburgerRef = useRef<HTMLButtonElement>(null)
 
+  // Initialize theme from document class
   useEffect(() => {
     const isLight = document.documentElement.classList.contains('light')
     setTheme(isLight ? 'light' : 'dark')
   }, [])
 
+  // Toggle theme function
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark'
     if (newTheme === 'light') {
@@ -50,10 +52,6 @@ export default function Header() {
     }
     setTheme(newTheme)
   }
-
-  // useEffect(() => {
-  //   fetchCounters().then(d => setVisitors(d.visits))
-  // }, [])
 
   // Close menu on route change
   useEffect(() => { setMenuOpen(false) }, [pathname])
@@ -87,6 +85,13 @@ export default function Header() {
     }
   }, [menuOpen])
 
+  useEffect(() => {
+  fetch("https://api.github.com/repos/rk192324217/cubosapiens_world-tools")
+    .then(res => res.json())
+    .then(data => setStars(data.stargazers_count))
+    .catch(() => setStars(null))
+}, [])
+
   function handleSearch(e: React.FormEvent) {
     e.preventDefault()
     if (search.trim()) {
@@ -116,7 +121,6 @@ export default function Header() {
 
   return (
     <>
-      {/* Inject Font Awesome once */}
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -148,7 +152,7 @@ export default function Header() {
                   href={link.href}
                   label={link.label}
                   className={`header-nav-link px-1 xl:px-3 ${pathname === link.href ? "header-nav-active" : ""}`}
-                  hasLive={hasLiveAi}
+                  hasLive={false}
                   showIcon={false}
                 />
               ) : (
@@ -183,9 +187,18 @@ export default function Header() {
 
           {/* ── RIGHT SIDE ── */}
           <div className="header-right flex items-center gap-3">
+            <a
+            href="https://github.com/rk192324217/cubosapiens_world-tools"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 px-2 py-1 rounded bg-black/40 hover:bg-black/60 text-white text-sm"
+            >
+            <i className="fa-solid fa-star text-yellow-400"></i>
+            <span>{stars !== null ? stars : "..."}</span>
+            </a>
 
-            {/* Desktop search bar */}
-            <form onSubmit={handleSearch} className="header-search-form !hidden lg:!flex items-center">
+             {/* Desktop search bar */}
+             <form onSubmit={handleSearch} className="header-search-form !hidden lg:!flex items-center">
               <span className="header-search-icon lg:text-[15px] xl:text-[17px] leading-none">⌕</span>
               <input
                 className="header-search !w-full max-w-[140px] xl:max-w-[220px]"
@@ -197,7 +210,7 @@ export default function Header() {
 
             {/* Mobile search toggle */}
             <button
-              className="header-icon-btn !flex lg:!hidden relative text-xl p-2 z-10 items-center justify-center text-white" //made the screen medium from tablet to laptop point of view
+              className="header-icon-btn !flex lg:!hidden relative text-xl p-2 z-10 items-center justify-center text-white"
               onClick={() => setSearchOpen(p => !p)}
               aria-label="Search"
             >
@@ -217,12 +230,6 @@ export default function Header() {
               )}
             </button>
 
-            {/* Visitor counter */}
-            {/* <div className="header-counter">
-              <i className="fa-solid fa-users" />
-              <span>{visitors !== null ? visitors.toLocaleString() : "—"}</span>
-            </div> */}
-
             {/* Mobile hamburger */}
             <button
               ref={hamburgerRef}
@@ -236,7 +243,7 @@ export default function Header() {
           </div>
         </header>
         {/* ── MOBILE SEARCH BAR (slides down) ── */}
-        {searchOpen && ( // added a fluid mobile search instead of a rigid one, below the header so while ensuring the text below isnt overlapping
+        {searchOpen && (
           <div className="absolute left-0 right-0 top-full z-50 w-full flex justify-center px-4 pt-2 pb-3 bg-[#0a0a0a]/95 backdrop-blur-md border-b border-white/5">
             <form onSubmit={handleSearch} className="header-search-mobile-form flex items-center">
               <span className="header-search-icon">⌕</span>
@@ -252,7 +259,7 @@ export default function Header() {
         )}
 
         {/* ── MOBILE DROPDOWN MENU ── */}
-        {menuOpen && ( // added an additional functionality so that the X works and the menu is closeable in phone.
+        {menuOpen && (
           <div className="header-dropdown" ref={menuRef}>
             <button
               className="dropdown-promo-btn"
@@ -261,6 +268,7 @@ export default function Header() {
               <i className="fa-solid fa-share-nodes"></i> Share Website
             </button>
 
+            {/* Theme toggle mobile */}
             <button
               className="theme-mobile-toggle"
               onClick={toggleTheme}
@@ -284,7 +292,7 @@ export default function Header() {
                       label={link.label}
                       icon={link.icon}
                       className={`dropdown-link ${pathname === link.href ? "dropdown-link-active" : ""}`}
-                      hasLive={hasLiveAi}
+                      hasLive={false}
                     />
                   ) : (
                     <Link
@@ -319,8 +327,6 @@ export default function Header() {
             </div>
 
             <div className="dropdown-divider" />
-
-
 
           </div>
         )}
