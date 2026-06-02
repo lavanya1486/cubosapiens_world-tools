@@ -10,7 +10,6 @@ import CookieBanner from "@/components/CookieBanner"
 import { fetchTools } from "@/lib/api"
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
-
 // ── Fonts loaded via next/font/google ─────────────────────────
 // Next.js downloads these at build time
 // No external requests at runtime — fast + no layout shift
@@ -82,24 +81,30 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={cn("font-sans", geist.variable)}>
       <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2633780400369885"
           crossOrigin="anonymous"></script>
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function() {
-            try {
-              var theme = localStorage.getItem('theme');
-              if (theme === 'light') {
-                document.documentElement.classList.add('light');
-              } else {
-                document.documentElement.classList.remove('light');
-              }
-            } catch (e) {}
-          })()
-        ` }} />
+        <script
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme') || 'dark';
+                  if (theme === 'light') {
+                    document.documentElement.classList.add('light');
+                  } else {
+                    document.documentElement.classList.remove('light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
       <body className={`${alfaSlabOne.variable} ${syne.variable} ${dmSans.variable}`}>
         <TrackVisit />
-        <Header hasLiveAi={false} />
+        <Header />
         <main>{children}</main>
         <Footer />
         <PWAInstallPrompt />
